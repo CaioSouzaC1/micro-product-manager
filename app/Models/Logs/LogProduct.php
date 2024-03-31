@@ -1,36 +1,26 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Logs;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Attachment extends Model
+class LogProduct extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'attachments';
+    protected $table = 'log_products';
 
     protected $fillable = [
         'product_id',
-        'name',
-        'type',
-        'path'
-    ];
-
-    protected $appends = [
-        'image_path'
+        'log_type'
     ];
 
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'id', 'product_id');
-    }
-
-    public function getImagePathAttribute(): string
-    {
-        return env('APP_URL') . '/' . $this->path;
     }
 }

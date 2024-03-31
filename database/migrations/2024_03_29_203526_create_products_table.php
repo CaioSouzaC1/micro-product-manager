@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('price');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->softDeletes();

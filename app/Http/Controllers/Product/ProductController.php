@@ -34,15 +34,16 @@ class ProductController extends Controller
     public function store(StoreRequest $request)
     {
         try {
-            $data = $this->productService->store($request->validated());
+            $data = $this->productService->store($request->validated(), $request->file('media'));
             return ReturnApi::success(
                 $data,
                 'Produto criado com sucesso!'
             );
         } catch (Throwable $e) {
+            info($e);
             throw new ApiException(
                 $e->getMessage() ?? "Erro ao criar produto",
-                $e->getCode()
+                $e->getCode() ?? 400
             );
         }
     }

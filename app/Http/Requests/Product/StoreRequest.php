@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests\Product;
 
+use App\Helpers\Product\DescriptionRuleHelper;
+use App\Helpers\Product\IsActiveRuleHelper;
+use App\Helpers\Product\MediaRuleHelper;
 use App\Helpers\Product\NameRuleHelper;
+use App\Helpers\Product\PriceRuleHelper;
 use App\Traits\BasicFormRequestValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,14 +31,22 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => NameRuleHelper::rule()
+            'name' => NameRuleHelper::rule(),
+            'description' => DescriptionRuleHelper::rule(),
+            'media.*' => MediaRuleHelper::rule(),
+            'price' => PriceRuleHelper::rule(),
+            'is_active' => IsActiveRuleHelper::rule()
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'name' => NameRuleHelper::attribute()
+            'name' => NameRuleHelper::attribute(),
+            'description' => DescriptionRuleHelper::attribute(),
+            'media' => MediaRuleHelper::attribute(),
+            'price' => PriceRuleHelper::attribute(),
+            'is_active' => IsActiveRuleHelper::attribute()
         ];
     }
 }

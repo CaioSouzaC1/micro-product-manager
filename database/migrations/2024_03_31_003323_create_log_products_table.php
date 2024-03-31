@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('log_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->string('name');
-            $table->string('path');
-            $table->string('type');
+            $table->string('log_type');
             $table->softDeletes();
             $table->timestamps();
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attachments');
+        Schema::dropIfExists('log_products');
     }
 };
